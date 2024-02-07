@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>norman spirit Chatbot</title>
+
+    <!-- css file link -->
+    <link rel="stylesheet" href="chatbox.css">
+
+    <!-- font awesome icon cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="parent">
+        <div class="desc">
+            <button id="init">START CHAT</button>
+        </div>
+        
+    </div>
+    <div id="test" style="position: fixed;top: 4rem;right: 8rem;display: none;">
+        <div class="child" id="chatbot">
+            <div class="header">
+                <div class="h-child">
+                    <img src="chatbot (1).png" alt="avatar" id="avatar">
+                    <div>
+                        <span class="name">norman spirit</span>
+                        <br>
+                        <span style="color:lawngreen">online</span>
+                    </div>
+                </div>
+                <div>
+                    <button class="refBtn"><i class="fa fa-refresh" onclick="initChat()"></i></button>
+                </div>
+            </div>
+            <p style="color: black;position: absolute;">dieudonnennnnn</p>
+
+            <div id="chat-box">
+                    
+            </div>
+            <div class="footer">
+                <div class="search-box">
+                    <input type="text" id="search-input">
+                    <input type="submit" value="Rechercher" onclick="searchGoogle()">
+                  </div>
+                <button onclick="startRecognition()" class="aud">&#127908</button>
+                <div id="result"></div>
+                <span>powered by @dieudonne norman</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- js file  -->
+    <script src="chatbox.js"></script>
+    <script>
+        function startRecognition() {
+          var recognition = new webkitSpeechRecognition();
+          recognition.lang = 'fr-FR';
+          
+          recognition.onresult = function(event) {
+            var result = event.results[0][0].transcript;
+            document.getElementById('result').innerHTML = 'Tu as dit : ' + result;
+            
+            // Faire la recherche sur Internet
+            var searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(result);
+            window.open(searchUrl, '_blank');
+          }
+          
+          recognition.start();
+        }
+      </script>
+      <script>
+        function searchGoogle() {
+          var searchQuery = document.getElementById("search-input").value;
+          var url = "https://www.google.com/search?q=" + encodeURIComponent(searchQuery);
+          window.location.href = url;
+        }
+    </script>
+</body>
+</html>
